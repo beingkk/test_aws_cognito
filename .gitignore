@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# NextJS
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+
+# uv virtual environment
+backend/.venv/
