@@ -1,5 +1,9 @@
 # Cognito Authentication
 
+AWS Cognito is a managed user authentication service. It stores user accounts, handles passwords securely, and issues cryptographically signed tokens that prove who a user is. When a user clicks "Sign in", they are redirected to a login page hosted by AWS (the Hosted UI). After entering their credentials, AWS redirects them back to our app with a short-lived code, which our frontend exchanges for three tokens: an **ID token** (who you are — contains name, email), an **access token** (what you're allowed to do — sent to the API), and a **refresh token** (used silently to get new tokens when the others expire).
+
+The backend never sees a password. Instead, when the frontend calls a protected API endpoint, it attaches the access token to the request. FastAPI verifies the token by checking its cryptographic signature against public keys that AWS publishes at a known URL. If the signature is valid and the token hasn't expired, the request is allowed through and the endpoint can read claims from the token (user ID, org ID, etc.) to decide what data to return. This means the backend is stateless — it doesn't store sessions, it just checks the maths on the token.
+
 ## What's been implemented
 
 ### AWS setup
